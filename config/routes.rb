@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   namespace 'api' do
     resources :videos, only: [:index, :show, :create]
     resources :tags, only: [:index, :show]
+    resources :users, only: [:index]
   end
 end
