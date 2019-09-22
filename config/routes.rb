@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     resources :videos
     resources :tags, only: [:index, :show]
     resources :users, only: [:index]
+    resources :sessions, only: [:create, :destroy]
   end
 end
