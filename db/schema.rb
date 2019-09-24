@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_22_215121) do
+ActiveRecord::Schema.define(version: 2019_09_23_073459) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2019_09_22_215121) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "encrypted_password"
     t.string "salt"
+    t.string "token"
   end
 
   create_table "video_tags", force: :cascade do |t|

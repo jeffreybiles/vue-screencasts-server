@@ -7,6 +7,11 @@ class User < ApplicationRecord
     self.save
   end
 
+  def set_token
+    self.token = Digest::SHA1.hexdigest("#{self.salt}#{Time.now}")
+    self.save
+  end
+
   def check_password(password)
     self.encrypted_password == Digest::SHA1.hexdigest("#{password}#{self.salt}")
   end
