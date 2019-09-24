@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 class User < ApplicationRecord
-  def add_password(password)
+  def set_password(password)
     self.salt = Digest::SHA1.hexdigest("#{self.email}#{Time.now}")
     self.encrypted_password = Digest::SHA1.hexdigest("#{password}#{self.salt}")
     self.save

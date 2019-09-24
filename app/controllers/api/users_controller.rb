@@ -5,8 +5,14 @@ class Api::UsersController < ActionController::API
   end
 
   def create
-    user = User.create(user_create_params)
-    render json: UserSerializer.new(user).serializable_hash
+    if(User.find_by email: params["email"]) then
+      head 401
+    else
+      user = User.create(user_create_params)
+      user.set_password(params["password"])
+      user.set_token()
+      render json: UserSerializer.new(user, params: { token: true }).serializable_hash
+    end
   end
 
   private
