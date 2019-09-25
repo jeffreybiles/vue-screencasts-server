@@ -1,4 +1,4 @@
-class Api::VideosController < ActionController::API
+class Api::VideosController < ApplicationController
   def index
     videos = Video.all
     render json: video_json(videos)
@@ -15,6 +15,9 @@ class Api::VideosController < ActionController::API
   end
 
   def destroy
+    puts "headers"
+    puts headers
+    byebug
     Video.find(params[:id]).destroy
     head 204
   end
