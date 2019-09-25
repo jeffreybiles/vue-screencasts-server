@@ -7,6 +7,10 @@ class ApplicationController < ActionController::API
   end
 
   def is_admin
-    user && user.admin
+    current_user && current_user.admin
+  end
+
+  def authenticate_user
+    return head 401 unless is_admin
   end
 end

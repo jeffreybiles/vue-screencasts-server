@@ -1,4 +1,6 @@
 class Api::VideosController < ApplicationController
+  before_action :authenticate_user, only: [:create, :update, :destroy]
+
   def index
     videos = Video.all
     render json: video_json(videos)
@@ -15,9 +17,6 @@ class Api::VideosController < ApplicationController
   end
 
   def destroy
-    puts "headers"
-    puts headers
-    byebug
     Video.find(params[:id]).destroy
     head 204
   end
