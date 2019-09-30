@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_080948) do
+ActiveRecord::Schema.define(version: 2019_09_30_134531) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 2019_09_25_080948) do
     t.string "salt"
     t.string "token"
     t.boolean "admin"
+  end
+
+  create_table "video_plays", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "video_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_video_plays_on_user_id"
+    t.index ["video_id"], name: "index_video_plays_on_video_id"
   end
 
   create_table "video_tags", force: :cascade do |t|

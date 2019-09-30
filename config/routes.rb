@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   namespace 'api' do
     resources :videos
     resources :tags, only: [:index, :show]
-    resources :users, only: [:index, :create]
+    resources :users, only: [:index, :create, :show]
     resources :sessions, only: [:create, :destroy]
+    resources :video_plays, only: :create
   end
 end

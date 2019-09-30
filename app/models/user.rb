@@ -1,6 +1,9 @@
 require 'digest/sha1'
 
 class User < ApplicationRecord
+  has_many :video_plays
+  has_many :played_videos, through: :video_plays, class_name: 'video'
+
   def set_password(password)
     self.salt = Digest::SHA1.hexdigest("#{self.email}#{Time.now}")
     self.encrypted_password = Digest::SHA1.hexdigest("#{password}#{self.salt}")

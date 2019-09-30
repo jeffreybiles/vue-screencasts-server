@@ -4,6 +4,11 @@ class Api::UsersController < ApplicationController
     render json: UserSerializer.new(users).serializable_hash
   end
 
+  def show
+    user = User.find(params["id"])
+    render json: UserSerializer.new(user).serializable_hash
+  end
+
   def create
     if(User.find_by email: params["email"]) then
       head 401
