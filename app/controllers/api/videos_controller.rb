@@ -28,6 +28,22 @@ class Api::VideosController < ApplicationController
     render json: video_json(video)
   end
 
+  def update_tags
+    video_id = params["id"]
+    new_tag_ids = params["tag_ids"]
+    old_tag_ids = Video.find(video_id).tag_ids.map(&:to_s)
+
+    added_tag_ids = new_tag_ids - old_tag_ids
+    removed_tag_ids = old_tag_ids - new_tag_ids
+
+    added_tag_ids.each do |tag_id|
+      VideoTag.create(video_id: video_id, tag_id: tag_id)
+    end
+    removed_tag_ids.each do |tag_id|
+      VideoTag.find_by(video_id: video_id, tag_id: tag_id).destroy
+    end
+  end
+
   private
 
   def video_json(video)
