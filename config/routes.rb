@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :videos
     resources :video_tags, only: [:create]
     post 'video_tags/delete', to: 'video_tags#delete'
-    resources :tags, only: [:index, :show, :create]
+    resources :tags, only: [:index, :show, :create, :update, :destroy]
     resources :users, only: [:index, :create, :show]
     resources :sessions, only: [:create, :destroy]
     resources :video_plays, only: :create
