@@ -4,6 +4,11 @@ class Api::TagsController < ApplicationController
     render json: TagSerializer.new(tag).serializable_hash
   end
 
+  def show
+    tag = Tag.find(params[:id])
+    render json: TagSerializer.new(tag, include: [:videos, :'videos.tags']).serializable_hash
+  end
+
   def index
     tags = Tag.all
     render json: TagSerializer.new(tags).serializable_hash
