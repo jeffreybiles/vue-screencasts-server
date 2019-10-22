@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:index, :show, :create, :update, :destroy]
     resources :users, only: [:index, :create, :show]
     resources :sessions, only: [:create, :destroy]
+    get 'sessions/user', to: 'sessions#user'
     resources :video_plays, only: :create
   end
 end
