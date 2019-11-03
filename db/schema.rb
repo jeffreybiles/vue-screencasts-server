@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2019_11_03_161647) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "duration"
-    t.datetime "release_time"
+    t.datetime "published_at"
     t.text "code_summary"
   end
 
