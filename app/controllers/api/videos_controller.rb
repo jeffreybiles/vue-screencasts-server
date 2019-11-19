@@ -4,11 +4,13 @@ class Api::VideosController < ApplicationController
   def index
     videos = Video.all
     render json: video_json(videos)
+    # render json: videos.map { |v| basic_json(v) }
   end
 
   def show
     video = Video.find(params[:id])
     render json: video_json(video)
+    # render json: basic_json(video)
   end
 
   def create
@@ -32,6 +34,18 @@ class Api::VideosController < ApplicationController
 
   def video_json(video)
     VideoSerializer.new(video, include: [:tags]).serializable_hash
+  end
+
+  def basic_json(video)
+    {
+      id: video.id,
+      name: video.name,
+      description: video.description,
+      thumbnail: video.thumbnail,
+      videoUrl: video.videoUrl,
+      created_at: video.created_at,
+      updated_at: video.updated_at
+    }
   end
 
   def video_params
