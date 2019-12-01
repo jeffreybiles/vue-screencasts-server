@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_03_161647) do
+ActiveRecord::Schema.define(version: 2019_12_01_141427) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "courses", force: :cascade do |t|
+    t.string "name"
+    t.integer "parent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "series_type"
+  end
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
@@ -30,8 +41,8 @@ ActiveRecord::Schema.define(version: 2019_11_03_161647) do
   end
 
   create_table "video_plays", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "video_id"
+    t.bigint "user_id"
+    t.bigint "video_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_video_plays_on_user_id"
@@ -39,8 +50,8 @@ ActiveRecord::Schema.define(version: 2019_11_03_161647) do
   end
 
   create_table "video_tags", force: :cascade do |t|
-    t.integer "video_id"
-    t.integer "tag_id"
+    t.bigint "video_id"
+    t.bigint "tag_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tag_id"], name: "index_video_tags_on_tag_id"
@@ -57,6 +68,9 @@ ActiveRecord::Schema.define(version: 2019_11_03_161647) do
     t.integer "duration"
     t.datetime "published_at"
     t.text "code_summary"
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_videos_on_course_id"
   end
 
+  add_foreign_key "videos", "courses"
 end

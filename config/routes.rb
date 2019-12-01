@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create, :destroy]
     get 'sessions/user', to: 'sessions#user'
     resources :video_plays, only: :create
+    resources :courses
   end
 end
