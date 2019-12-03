@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     get 'sessions/user', to: 'sessions#user'
     resources :video_plays, only: :create
     resources :courses
+    post 'courses/:id/attach-video/:video_id', to: "courses#attach_video"
+    post 'courses/:id/detach-video/:video_id', to: "courses#detach_video"
   end
 end
