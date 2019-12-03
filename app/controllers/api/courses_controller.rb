@@ -36,12 +36,30 @@ class Api::CoursesController < ApplicationController
     render json: VideoSerializer.new(video, include: [:course]).serializable_hash
   end
 
+  def attach_chapter
+    chapter = Course.find(params[:chapter_id])
+    parent = Course.find(params[:id])
+    chapter.parent_id = parent.id
+    chapter.order = parent.max_order + 1
+    chapter.save
+
+    render json: CourseSerializer.new(chapter, include: [:parent]).serializable_hash
+  end
+
   def detach_video
     video = Video.find(params[:video_id])
     course = Course.find(params[:id])
     course.videos.delete(video)
     course.save
-    render json: CourseSerializer.new(course).serializable_hash
+    render json: course_json(course)
+  end
+
+  def detach_chapter
+    chapter = Course.find(params[:chapter_id])
+    course = Course.find(params[:id])
+    course.chapters.delete(chapter)
+    course.save
+    render json: course_json(course)
   end
 
   private

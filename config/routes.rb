@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :video_plays, only: :create
     resources :courses
     post 'courses/:id/attach-video/:video_id', to: "courses#attach_video"
+    post 'courses/:id/attach-chapter/:chapter_id', to: "courses#attach_chapter"
     post 'courses/:id/detach-video/:video_id', to: "courses#detach_video"
+    post 'courses/:id/detach-chapter/:chapter_id', to: "courses#detach_chapter"
   end
 end

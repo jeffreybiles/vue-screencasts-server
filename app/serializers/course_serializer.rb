@@ -2,6 +2,6 @@ class CourseSerializer
   include FastJsonapi::ObjectSerializer
   attributes :name, :series_type, :image_url, :description, :order
   has_many :videos
-  belongs_to :parent
+  belongs_to :parent, serializer: :course
   has_many :chapters
 end
