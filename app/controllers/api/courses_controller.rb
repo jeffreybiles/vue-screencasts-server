@@ -30,7 +30,7 @@ class Api::CoursesController < ApplicationController
     video = Video.find(params[:video_id])
     course = Course.find(params[:id])
     video.course_id = course.id
-    video.order = course.max_order + 1
+    video.order = (course.max_order || 0) + 1
     video.save
 
     render json: VideoSerializer.new(video, include: [:course]).serializable_hash
@@ -40,7 +40,7 @@ class Api::CoursesController < ApplicationController
     chapter = Course.find(params[:chapter_id])
     parent = Course.find(params[:id])
     chapter.parent_id = parent.id
-    chapter.order = parent.max_order + 1
+    chapter.order = (parent.max_order || 0) + 1
     chapter.save
 
     render json: CourseSerializer.new(chapter, include: [:parent]).serializable_hash
