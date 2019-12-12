@@ -5,5 +5,5 @@ class Video < ApplicationRecord
   has_many :video_plays
   has_many :users, through: :video_plays
 
-  belongs_to :course
+  belongs_to :course, optional: true
 end
