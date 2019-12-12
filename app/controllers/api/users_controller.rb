@@ -18,6 +18,26 @@ class Api::UsersController < ApplicationController
     render json: UserSerializer.new(user).serializable_hash
   end
 
+  def get_user_from_token
+    user = User.find(params[:id])
+    if(user.email_subscription_token == params[:email_subscription_token]) then
+      render json: UserSerializer.new(user).serializable_hash
+    else
+      head 401
+    end
+  end
+
+  def update_email_subscriptions_from_token
+    user = User.find(params[:id])
+    if(user.email_subscription_token == params[:email_subscription_token]) then
+      user.update(update_via_token_params)
+      user.save
+      render json: UserSerializer.new(user).serializable_hash
+    else
+      head 401
+    end
+  end
+
   private
 
   def user_create_params
@@ -26,5 +46,9 @@ class Api::UsersController < ApplicationController
 
   def user_update_params
     params.require(:user).permit(:name, :email, :email_weekly, :email_daily)
+  end
+
+  def update_via_token_params
+    params.require(:user).permit(:email_weekly, :email_daily)
   end
 end

@@ -6,6 +6,9 @@ Rails.application.routes.draw do
     post 'video_tags/delete', to: 'video_tags#delete'
     resources :tags, only: [:index, :show, :create, :update, :destroy]
     resources :users, only: [:create, :destroy, :update]
+    post 'users/update_email', to: 'users#update_email'
+    get 'users/:id/:email_subscription_token', to: 'users#get_user_from_token'
+    post 'users/:id/:email_subscription_token', to: 'users#update_email_subscriptions_from_token'
     resources :sessions, only: [:create, :destroy]
     get 'sessions/user', to: 'sessions#user'
     resources :video_plays, only: :create
