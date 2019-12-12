@@ -11,8 +11,17 @@ class User < ApplicationRecord
   end
 
   def set_token
-    self.token = Digest::SHA1.hexdigest("#{self.salt}#{Time.now}")
+    self.token = generate_token
     self.save
+  end
+
+  def set_email_token
+    self.email_subscription_token = generate_token(Time.now + 20000)
+    self.save
+  end
+
+  def generate_token(extra_salt = Time.now)
+    Digest::SHA1.hexdigest("#{self.salt}#{extra_salt}")
   end
 
   def check_password(password)

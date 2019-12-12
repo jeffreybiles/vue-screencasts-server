@@ -5,7 +5,8 @@ class Api::UsersController < ApplicationController
     else
       user = User.create(user_create_params)
       user.set_password(params["password"])
-      user.set_token()
+      user.set_token
+      user.set_email_token
       render json: UserSerializer.new(user, params: { token: true }).serializable_hash
     end
   end
