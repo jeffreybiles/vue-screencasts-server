@@ -2,7 +2,7 @@ class Api::VideosController < ApplicationController
   before_action :authenticate_user, only: [:create, :update, :destroy]
 
   def index
-    videos = Video.all
+    videos = Video.preload(:tags).all
     render json: video_json(videos)
   end
 
@@ -31,7 +31,7 @@ class Api::VideosController < ApplicationController
   private
 
   def video_json(video)
-    VideoSerializer.new(video, include: [:tags]).serializable_hash
+    VideoSerializer.new(video).serializable_hash
   end
 
   def video_params
