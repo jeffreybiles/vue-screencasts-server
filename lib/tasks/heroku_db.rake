@@ -6,7 +6,15 @@ namespace :heroku_db do
 
   task :from_heroku_to_dev do
     sh "heroku pg:backups:capture"
-    sh "curl -o latest.dump `heroku pgbackups:url`"
+    sh "curl -o latest.dump `heroku pg:backups:url`"
     sh "pg_restore --verbose --clean --no-acl --no-owner -h localhost -U jeffreybiles -d vuescreencasts_dev latest.dump"
+  end
+end
+
+
+task :remove_numbers_from_videos => :environment do 
+  Video.all.each do |video|
+    video.name = video.name.gsub(/[\/\d\.]+ /, '')
+    video.save
   end
 end
