@@ -2,7 +2,7 @@ class Api::VideosController < ApplicationController
   before_action :authenticate_user, only: [:create, :update, :destroy]
 
   def index
-    videos = Video.preload(:tags).all
+    videos = Video.all
     render json: video_json(videos)
   end
 
