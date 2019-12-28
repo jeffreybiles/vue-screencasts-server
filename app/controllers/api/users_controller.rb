@@ -1,3 +1,5 @@
+require 'sib-api-v3-sdk'
+
 class Api::UsersController < ApplicationController
   def create
     if(User.find_by email: params["email"]) then
@@ -7,6 +9,9 @@ class Api::UsersController < ApplicationController
       user.set_password(params["password"])
       user.set_token
       user.set_email_token
+
+      signup_user_for_newsletter(user) if user.email_weekly
+
       render json: UserSerializer.new(user, params: { token: true }).serializable_hash
     end
   end
@@ -50,5 +55,18 @@ class Api::UsersController < ApplicationController
 
   def update_via_token_params
     params.require(:user).permit(:email_weekly, :email_daily)
+  end
+
+  def signup_user_for_newsletter(user)
+    api_instance = SibApiV3Sdk::ContactsApi.new
+    create_contact = SibApiV3Sdk::CreateContact.new(email: user.email, listIds: [3])
+
+    begin
+      #Create a contact
+      result = api_instance.create_contact(create_contact)
+      p result
+    rescue SibApiV3Sdk::ApiError => e
+      puts "Exception when calling ContactsApi->create_contact: #{e}"
+    end
   end
 end
