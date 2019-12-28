@@ -16,6 +16,16 @@ class Api::UsersController < ApplicationController
     end
   end
 
+  def newsletter_subscribe
+    user = current_user
+    user.email_weekly = true
+    user.save
+
+    signup_user_for_newsletter(user)
+
+    head 200
+  end
+
   def update
     user = current_user
     user.update(user_update_params)

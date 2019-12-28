@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:index, :show, :create, :update, :destroy]
     resources :users, only: [:create, :destroy, :update]
     post 'users/update_email', to: 'users#update_email'
+    post 'users/newsletter_subscribe', to: 'users#newsletter_subscribe'
     get 'users/:id/:email_subscription_token', to: 'users#get_user_from_token'
     post 'users/:id/:email_subscription_token', to: 'users#update_email_subscriptions_from_token'
     resources :sessions, only: [:create, :destroy]
