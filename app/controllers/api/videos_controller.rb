@@ -31,7 +31,7 @@ class Api::VideosController < ApplicationController
   private
 
   def video_json(video)
-    VideoSerializer.new(video).serializable_hash
+    VideoSerializer.new(video, params: { user_pro: current_user && current_user.pro }).serializable_hash
   end
 
   def video_params

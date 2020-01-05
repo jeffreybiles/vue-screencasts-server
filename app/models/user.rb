@@ -27,4 +27,9 @@ class User < ApplicationRecord
   def check_password(password)
     self.encrypted_password == Digest::SHA1.hexdigest("#{password}#{self.salt}")
   end
+
+  def pro
+    # TODO: when we get payments, make this calculate based on today's date and when the pro plan expires
+    true
+  end
 end
