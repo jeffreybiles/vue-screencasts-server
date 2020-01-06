@@ -18,5 +18,6 @@ Rails.application.routes.draw do
     post 'courses/:id/attach-chapter/:chapter_id', to: "courses#attach_chapter"
     post 'courses/:id/detach-video/:video_id', to: "courses#detach_video"
     post 'courses/:id/detach-chapter/:chapter_id', to: "courses#detach_chapter"
+    post 'stripe/create_session_id', "stripe#create_session_id"
   end
 end
