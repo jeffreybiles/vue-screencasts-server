@@ -10,8 +10,8 @@ class Api::StripeController < ApplicationController
           plan: params[:plan_id]
         }]
       },
-      success_url: 'https://www.vuescreencasts.com/subscription_success',
-      cancel_url: 'https://www.vuescreencasts/pro'
+      success_url: "#{ENV['BASE_URL']}/subscription_success",
+      cancel_url: "#{ENV['BASE_URL']}/pro"
     )
     render json: {session_id: session.id}
   end
