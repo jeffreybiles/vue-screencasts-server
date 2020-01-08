@@ -29,7 +29,8 @@ class User < ApplicationRecord
   end
 
   def pro
-    # TODO: when we get payments, make this calculate based on today's date and when the pro plan expires
-    true
+    # This is a placeholder so it'll work nicely after signing up
+    # TODO: make this calculate based on today's date and when the pro plan expires
+    return !!self.subscription_id
   end
 end

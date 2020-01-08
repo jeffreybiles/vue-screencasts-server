@@ -1,18 +1,41 @@
 Stripe.api_key = 'sk_test_Hps7yIGXMTwzBFh9pTsci6wy'
 
 class Api::StripeController < ApplicationController
-  def create_session_id
-    session = Stripe::Checkout::Session.create(
-      customer_email: current_user && current_user.email,
-      payment_method_types: ['card'],
-      subscription_data: {
-        items: [{
-          plan: params[:plan_id]
-        }]
-      },
-      success_url: "#{ENV['BASE_URL']}/subscription_success",
-      cancel_url: "#{ENV['BASE_URL']}/pro"
-    )
-    render json: {session_id: session.id}
+  def create_subscription
+    source = params['source']
+    planId = params['planId']
+
+    user = current_user
+
+    if(user.stripe_id)
+      customer = Stripe::Customer.retrieve(user.stripe_id)
+    end
+
+    if !customer
+      customer = Stripe::Customer.create({
+        email: user.email,
+        name: user.name,
+        source: source['id'],
+        metadata: {
+          app_id: user.id
+        }
+      })
+
+      user.stripe_id = customer.id
+      user.save
+    end
+
+    # TODO: test what happens when it's called multiple times on one user
+    # Desired behavior is to cancel the old subscription and create a new one
+
+    subscription = Stripe::Subscription.create({
+      customer: customer.id,
+      items: [{plan: planId}]
+    })
+
+    user.subscription_id = subscription.id
+    user.save
+
+    render json: UserSerializer.new(user).serializable_hash
   end
 end

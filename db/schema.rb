@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_29_055737) do
+ActiveRecord::Schema.define(version: 2020_01_08_151514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 2019_12_29_055737) do
     t.boolean "email_weekly"
     t.boolean "email_daily"
     t.string "email_subscription_token"
+    t.string "stripe_id"
+    t.string "subscription_id"
   end
 
   create_table "video_plays", force: :cascade do |t|
