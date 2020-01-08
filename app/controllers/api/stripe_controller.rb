@@ -53,7 +53,7 @@ class Api::StripeController < ApplicationController
     
     render json: {
       charges: charges.data,
-      card: card.data,
+      card: card.data[0].card,
       subscription: subscription,
       customer: customer
     }
