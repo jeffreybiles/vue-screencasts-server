@@ -45,7 +45,6 @@ class Api::StripeController < ApplicationController
       head 400
     end
 
-    customer = Stripe::Customer.retrieve(customer_id)
     subscription = Stripe::Subscription.retrieve(current_user.subscription_id)
     card = Stripe::Customer.retrieve_source(customer_id, subscription.default_payment_method)
     charges = Stripe::Charge.list({customer: customer_id})
@@ -55,7 +54,6 @@ class Api::StripeController < ApplicationController
       charges: charges.data,
       card: card.data[0].card,
       subscription: subscription,
-      customer: customer
     }
   end
 end
