@@ -56,4 +56,9 @@ class Api::StripeController < ApplicationController
       subscription: subscription,
     }
   end
+
+  def cancel_subscription
+    subscription = Stripe::Subscription.update(current_user.subscription_id, {cancel_at_period_end: true})
+    render json: subscription
+  end
 end
