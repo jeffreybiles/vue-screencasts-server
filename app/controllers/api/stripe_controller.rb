@@ -38,4 +38,24 @@ class Api::StripeController < ApplicationController
 
     render json: UserSerializer.new(user).serializable_hash
   end
+
+  def user_info
+    customer_id = current_user.stripe_id 
+    if(!customer_id)
+      head 400
+    end
+
+    customer = Stripe::Customer.retrieve(customer_id)
+    subscription = Stripe::Subscription.retrieve(current_user.subscription_id)
+    card = Stripe::Customer.retrieve_source(customer_id, subscription.default_payment_method)
+    charges = Stripe::Charge.list({customer: customer_id})
+    
+    
+    render json: {
+      charges: charges.data,
+      card: card.data,
+      subscription: subscription,
+      customer: customer
+    }
+  end
 end
