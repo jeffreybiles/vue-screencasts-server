@@ -1,4 +1,5 @@
 require 'digest/sha1'
+Stripe.api_key = 'sk_test_Hps7yIGXMTwzBFh9pTsci6wy'
 
 class User < ApplicationRecord
   has_many :video_plays
@@ -29,8 +30,33 @@ class User < ApplicationRecord
   end
 
   def pro
-    # This is a placeholder so it'll work nicely after signing up
-    # TODO: make this calculate based on today's date and when the pro plan expires
-    return !!self.subscription_id
+    return calculate_pro
   end
+
+  def calculate_pro
+    return false if !self.subscription_id
+
+    subscription_still_good = self.subscription_end_date && DateTime.now < self.subscription_end_date
+    return true if subscription_still_good
+
+    return false if self.subscription_cancelled
+
+    update_pro_status
+    return calculate_pro
+  end
+
+  def update_pro_status
+    subscription = Stripe::Subscription.retrieve(self.subscription_id)
+    self.subscription_end_date = Time.at(subscription.current_period_end)
+    self.subscription_cancelled = !!subscription.canceled_at
+    self.save
+  end
+
+  def __testing__clear_subscription
+    self.subscription_cancelled = nil
+    self.subscription_end_date = nil
+    self.subscription_id = nil
+    self.save
+  end
+
 end

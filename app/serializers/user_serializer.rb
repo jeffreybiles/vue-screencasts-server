@@ -1,6 +1,6 @@
 class UserSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :name, :email, :admin, :created_at, :pro
+  attributes :id, :name, :email, :admin, :created_at, :pro, :subscription_cancelled
 
   attribute :played_video_ids do |object|
     object.video_plays.map(&:video_id).uniq

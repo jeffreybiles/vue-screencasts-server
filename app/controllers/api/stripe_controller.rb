@@ -45,20 +45,26 @@ class Api::StripeController < ApplicationController
       head 400
     end
 
-    subscription = Stripe::Subscription.retrieve(current_user.subscription_id)
-    card = Stripe::Customer.retrieve_source(customer_id, subscription.default_payment_method)
+    if(current_user.subscription_id) then
+      subscription = Stripe::Subscription.retrieve(current_user.subscription_id)
+      card = Stripe::Customer.retrieve_source(customer_id, subscription.default_payment_method)
+      card = card.data[0].card
+    end
     charges = Stripe::Charge.list({customer: customer_id})
     
     
     render json: {
       charges: charges.data,
-      card: card.data[0].card,
+      card: card,
       subscription: subscription,
     }
   end
 
   def cancel_subscription
-    subscription = Stripe::Subscription.update(current_user.subscription_id, {cancel_at_period_end: true})
+    user = current_user
+    subscription = Stripe::Subscription.update(user.subscription_id, {cancel_at_period_end: true})
+    user.subscription_cancelled = true
+    user.save
     render json: subscription
   end
 end
