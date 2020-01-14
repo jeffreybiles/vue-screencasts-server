@@ -21,5 +21,6 @@ Rails.application.routes.draw do
     post 'stripe/create_subscription', "stripe#create_subscription"
     get 'stripe/user_info', "stripe#user_info"
     post 'stripe/cancel_subscription', "stripe#cancel_subscription"
+    post 'stripe/resubscribe', "stripe#resubscribe"
   end
 end
