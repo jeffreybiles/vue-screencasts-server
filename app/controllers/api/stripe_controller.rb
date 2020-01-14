@@ -76,4 +76,12 @@ class Api::StripeController < ApplicationController
     user.save
     render json: subscription
   end
+
+  def change_card
+    response = Stripe::Customer.update(current_user.stripe_id, {
+      source: params[:source][:id]
+    })
+    card = response.sources.data.first
+    render json: card
+  end
 end
