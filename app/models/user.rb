@@ -1,5 +1,5 @@
 require 'digest/sha1'
-Stripe.api_key = 'sk_test_Hps7yIGXMTwzBFh9pTsci6wy'
+Stripe.api_key = ENV['STRIPE_SECRET']
 
 class User < ApplicationRecord
   has_many :video_plays

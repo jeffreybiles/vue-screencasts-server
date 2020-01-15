@@ -1,4 +1,4 @@
-Stripe.api_key = 'sk_test_Hps7yIGXMTwzBFh9pTsci6wy'
+Stripe.api_key = ENV['STRIPE_SECRET']
 
 class Api::StripeController < ApplicationController
   def create_subscription
