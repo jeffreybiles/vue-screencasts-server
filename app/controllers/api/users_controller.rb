@@ -28,9 +28,19 @@ class Api::UsersController < ApplicationController
 
   def update
     user = current_user
-    user.update(user_update_params)
-    user.save
-    render json: UserSerializer.new(user).serializable_hash
+    if user.check_password(params[:old_password]) then
+      user.update(user_update_params)
+      user.save
+
+      new_password = params[:new_password]      
+      if new_password && new_password.length >= 8 then
+        user.set_password(new_password)
+      end
+      render json: UserSerializer.new(user).serializable_hash
+    else
+      head 401
+    end
+    
   end
 
   def get_user_from_token
@@ -60,7 +70,7 @@ class Api::UsersController < ApplicationController
   end
 
   def user_update_params
-    params.require(:user).permit(:name, :email, :email_weekly, :email_daily)
+    params.require(:user).permit(:name, :email)
   end
 
   def update_via_token_params
