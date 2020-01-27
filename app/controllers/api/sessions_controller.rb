@@ -8,9 +8,13 @@ class Api::SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    head 200
+  end
+
   def user
     if current_user
-      render json: UserSerializer.new(current_user).serializable_hash
+      render json: UserSerializer.new(current_user, params: { admin: current_user.admin }).serializable_hash
     else
       head 401
     end

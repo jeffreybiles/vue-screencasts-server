@@ -31,10 +31,10 @@ class Api::VideosController < ApplicationController
   private
 
   def video_json(video)
-    VideoSerializer.new(video, include: [:tags]).serializable_hash
+    VideoSerializer.new(video, params: { user_pro: current_user && current_user.pro }).serializable_hash
   end
 
   def video_params
-    params.require(:video).permit(:name, :description, :thumbnail, :videoUrl, :duration, :release_time, :code_summary)
+    params.require(:video).permit(:name, :description, :thumbnail, :videoUrl, :duration, :published_at, :code_summary, :order, :course_id, :pro)
   end
 end
