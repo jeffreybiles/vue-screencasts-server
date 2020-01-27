@@ -36,9 +36,6 @@ gem 'sib-api-v3-sdk'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
-  # TODO: once deployed and there's some data, swich dev to pg and pull the production DB
-  gem 'sqlite3', '~> 1.4'
 end
 
 group :development do
