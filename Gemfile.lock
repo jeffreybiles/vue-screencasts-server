@@ -113,9 +113,9 @@ GEM
     pg (1.1.4)
     public_suffix (4.0.1)
     puma (3.12.2)
-    rack (2.0.8)
-    rack-cors (1.0.5)
-      rack (>= 1.6.0)
+    rack (2.1.1)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
