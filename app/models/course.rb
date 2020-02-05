@@ -8,7 +8,7 @@ class Course < ApplicationRecord
     orders.select{|x| x}.max
   end
 
-  def is_active
-    self.videos.map(&:lesson_type).include?('exercise')
+  def category
+    self.videos.map(&:lesson_type).include?('Exercise') ? 'interactive' : 'watch-me-code'
   end
 end
