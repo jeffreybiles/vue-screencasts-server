@@ -9,6 +9,6 @@ class Course < ApplicationRecord
   end
 
   def category
-    self.videos.map(&:lesson_type).include?('Exercise') ? 'interactive' : 'watch-me-code'
+    self.videos.map(&:lesson_type).include?('Exercise') ? 'Interactive' : 'Watch Me Code'
   end
 end
