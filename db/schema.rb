@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_13_211401) do
+ActiveRecord::Schema.define(version: 2020_02_05_195030) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 2020_01_13_211401) do
     t.bigint "course_id"
     t.decimal "order"
     t.boolean "pro"
+    t.string "lesson_type"
     t.index ["course_id"], name: "index_videos_on_course_id"
   end
 

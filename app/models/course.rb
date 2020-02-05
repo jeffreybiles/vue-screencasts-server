@@ -7,4 +7,8 @@ class Course < ApplicationRecord
     orders = self.chapters.map(&:order) + self.videos.map(&:order)
     orders.select{|x| x}.max
   end
+
+  def is_active
+    self.videos.map(&:lesson_type).include?('exercise')
+  end
 end
