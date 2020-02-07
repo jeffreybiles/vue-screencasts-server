@@ -1,6 +1,6 @@
 class Api::SessionsController < ApplicationController
   def create
-    user = User.find_by email: params["email"]
+    user = User.find_by email: params["email"].downcase
     if(user and user.check_password(params["password"])) then
       render json: {token: user.token}
     else

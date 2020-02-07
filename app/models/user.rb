@@ -4,6 +4,7 @@ Stripe.api_key = ENV['STRIPE_SECRET']
 class User < ApplicationRecord
   has_many :video_plays
   has_many :played_videos, through: :video_plays, class_name: 'video'
+  before_save :downcase_fields
 
   def set_password(password)
     self.salt = Digest::SHA1.hexdigest("#{self.email}#{Time.now}")
@@ -59,4 +60,7 @@ class User < ApplicationRecord
     self.save
   end
 
+  def downcase_fields
+    self.email.downcase!
+  end
 end

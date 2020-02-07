@@ -2,7 +2,7 @@ require 'sib-api-v3-sdk'
 
 class Api::UsersController < ApplicationController
   def create
-    if(User.find_by email: params["email"]) then
+    if(User.find_by email: params["email"].downcase) then
       head 401
     else
       user = User.create(user_create_params)
