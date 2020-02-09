@@ -8,7 +8,11 @@ class Api::UsersController < ApplicationController
       user.set_token
       user.set_email_token
 
-      signup_user_for_newsletter(user) if user.email_weekly
+      newsletters = []
+      newsletters.append(3) if user.email_weekly
+      newsletters.append(6) if user.email_daily
+      
+      user.create_sendinblue_contact(newsletters)
 
       render json: UserSerializer.new(user, params: { token: true }).serializable_hash
     end

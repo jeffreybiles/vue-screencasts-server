@@ -63,4 +63,18 @@ class User < ApplicationRecord
   def downcase_fields
     self.email.downcase!
   end
+
+  def create_sendinblue_contact(newsletters)
+    api_instance = SibApiV3Sdk::ContactsApi.new
+    create_contact = SibApiV3Sdk::CreateContact.new(email: self.email, listIds: newsletters)
+
+    begin
+      #Create a contact
+      result = api_instance.create_contact(create_contact)
+      p result
+    rescue SibApiV3Sdk::ApiError => e
+      puts "Exception when calling ContactsApi->create_contact: #{e}"
+      head 500
+    end
+  end
 end
