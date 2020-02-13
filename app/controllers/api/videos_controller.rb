@@ -28,6 +28,11 @@ class Api::VideosController < ApplicationController
     render json: video_json(video)
   end
 
+  def comments
+    video = Video.includes(:comments).find(params[:id])
+    render json: CommentSerializer.new(video.comments).serializable_hash
+  end
+
   private
 
   def video_json(video)
