@@ -10,7 +10,7 @@ class Api::CommentsController < ApplicationController
     comment = Comment.find(params[:id])
     if current_user.id == comment.user_id
       comment.content = params[:content] if params[:content]
-      comment.deleted = params[:deleted] if params[:deleted]
+      comment.deleted = params[:deleted] if params[:deleted] != nil
       comment.save
       render json: comment_json(comment)
     else
