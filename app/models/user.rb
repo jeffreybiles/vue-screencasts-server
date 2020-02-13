@@ -2,6 +2,8 @@ require 'digest/sha1'
 Stripe.api_key = ENV['STRIPE_SECRET']
 
 class User < ApplicationRecord
+  has_many :comments
+  has_many :notifications
   has_many :video_plays
   has_many :played_videos, through: :video_plays, class_name: 'video'
   before_save :downcase_fields

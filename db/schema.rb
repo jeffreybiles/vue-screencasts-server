@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_05_195030) do
+ActiveRecord::Schema.define(version: 2020_02_12_224237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.boolean "deleted"
+    t.integer "parent_id"
+    t.integer "user_id"
+    t.integer "video_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "courses", force: :cascade do |t|
     t.string "name"
@@ -25,6 +35,16 @@ ActiveRecord::Schema.define(version: 2020_02_05_195030) do
     t.text "description"
     t.decimal "order"
     t.string "difficulty"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.boolean "read"
+    t.boolean "email_sent"
+    t.integer "user_id"
+    t.integer "comment_id"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|
