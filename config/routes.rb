@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     resources :videos
     get 'videos/:id/comments', to: 'videos#comments'
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :update]
     resources :video_tags, only: [:create]
     post 'video_tags/delete', to: 'video_tags#delete'
     resources :tags, only: [:index, :show, :create, :update, :destroy]

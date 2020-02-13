@@ -6,6 +6,17 @@ class Api::CommentsController < ApplicationController
     render json: comment_json(comment)
   end
 
+  def update
+    comment = Comment.find(params[:id])
+    if current_user.id == comment.user_id
+      comment.content = params[:content] if params[:content]
+      comment.deleted = params[:deleted] if params[:deleted]
+      comment.save
+      render json: comment_json(comment)
+    else
+      head 400
+    end
+  end
 
   private
 
