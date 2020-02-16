@@ -1,5 +1,4 @@
 class NotificationSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :content, :created_at
-  has_one :comment, include: true
+  attributes :content, :created_at, :video_id, :comment_id
 end
