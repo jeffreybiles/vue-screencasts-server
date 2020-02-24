@@ -34,6 +34,9 @@ class Api::StripeController < ApplicationController
     })
 
     user.subscription_id = subscription.id
+    user.plan_id = planId
+    user.plan_hash = subscription.plan.to_json
+    
     user.save
 
     render json: UserSerializer.new(user).serializable_hash
