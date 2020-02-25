@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_24_033312) do
+ActiveRecord::Schema.define(version: 2020_02_25_175024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 2020_02_24_033312) do
     t.boolean "subscription_cancelled"
     t.string "plan_id"
     t.hstore "plan_hash", default: {}
+    t.string "phone_number"
+    t.hstore "next_steps_taken", default: {}
   end
 
   create_table "video_plays", force: :cascade do |t|

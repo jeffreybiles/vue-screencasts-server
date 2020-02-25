@@ -32,7 +32,16 @@ class Api::UsersController < ApplicationController
     else
       head 401
     end
-    
+  end
+
+  def update_nonsensitive
+    user = current_user
+    user.next_steps_taken = params[:next_steps_taken] if params[:next_steps_taken]
+    user.phone_number = params[:phone_number] if params[:phone_number]
+
+    user.save
+
+    render json: UserSerializer.new(user).serializable_hash
   end
 
   def get_user_from_token
