@@ -8,10 +8,6 @@ class Course < ApplicationRecord
     orders.select{|x| x}.max
   end
 
-  def category
-    self.videos.map(&:lesson_type).include?('Exercise') ? 'Interactive' : 'Watch Me Code'
-  end
-
   # go through the description and title of every course and video to replace an old word with a new word.
   # First use was VueX -> Vuex
   def self.update_data(old_word, new_word)
