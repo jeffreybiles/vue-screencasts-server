@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     put 'users/:id/update_nonsensitive', to: 'users#update_nonsensitive'
     get 'email_preferences/status', to: 'email_preferences#status'
     post 'email_preferences/change_subscription', to: 'email_preferences#change_subscription'
+    post 'email_preferences/passwordless_subscription', to: 'email_preferences#passwordless_subscription'
     get 'users/:id/:email_subscription_token', to: 'users#get_user_from_token'
     post 'users/:id/:email_subscription_token', to: 'users#update_email_subscriptions_from_token'
     resources :sessions, only: [:create, :destroy]
