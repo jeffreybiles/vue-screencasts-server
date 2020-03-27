@@ -35,6 +35,8 @@ class User < ApplicationRecord
   end
 
   def calculate_pro
+    return true if self.free_subscription
+    
     return false if !self.subscription_id
 
     subscription_still_good = self.subscription_end_date && DateTime.now < self.subscription_end_date
