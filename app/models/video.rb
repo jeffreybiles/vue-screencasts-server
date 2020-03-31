@@ -8,6 +8,6 @@ class Video < ApplicationRecord
   belongs_to :course, optional: true
 
   def in_free_period
-    (Date.today - 7) < published_at
+    published_at && (Date.today - 7) < published_at
   end
 end
