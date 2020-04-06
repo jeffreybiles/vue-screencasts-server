@@ -1,5 +1,7 @@
 class Email
   def self.create_sendinblue_contact(email, newsletters)
+    return if Rails.env == 'development'
+
     api_instance = SibApiV3Sdk::ContactsApi.new
     create_contact = SibApiV3Sdk::CreateContact.new(email: email, listIds: newsletters)
 
