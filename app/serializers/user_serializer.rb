@@ -6,6 +6,10 @@ class UserSerializer
     object.video_plays.map(&:video_id).uniq
   end
 
+  attribute :has_stripe do |object|
+    !!object.stripe_id && !!object.subscription_id
+  end
+
   attribute :token, if: Proc.new { |record, params|
     params && params[:token]
   }
