@@ -4,6 +4,7 @@ class Api::StripeController < ApplicationController
   def create_subscription
     source = params['source']
     planId = params['planId']
+    seats = params['seats']
 
     user = current_user
 
@@ -30,11 +31,12 @@ class Api::StripeController < ApplicationController
 
     subscription = Stripe::Subscription.create({
       customer: customer.id,
-      items: [{plan: planId}]
+      items: [{plan: planId, quantity: seats}]
     })
 
     user.subscription_id = subscription.id
     user.plan_id = planId
+    user.plan_seats = seats
     user.plan_hash = subscription.plan.to_hash
     user.save
 
