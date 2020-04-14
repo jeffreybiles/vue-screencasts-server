@@ -36,7 +36,7 @@ class Api::StripeController < ApplicationController
 
     user.subscription_id = subscription.id
     user.plan_id = planId
-    user.plan_seats = seats
+    user.plan_seats = seats.to_i
     user.plan_hash = subscription.plan.to_hash
     user.save
 
