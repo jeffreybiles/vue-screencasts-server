@@ -37,7 +37,7 @@ class Api::EmailPreferencesController < ApplicationController
   def status
     begin
       #Retrieves contact informations
-      result = api_instance.get_contact_info(current_user.email)
+      result = Email.new.contact(current_user.email)
       render json: {
         contact: result,
       }
