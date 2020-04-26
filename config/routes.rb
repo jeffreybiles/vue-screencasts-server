@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :video_tags, only: [:create]
     post 'video_tags/delete', to: 'video_tags#delete'
     resources :tags, only: [:index, :show, :create, :update, :destroy]
-    resources :users, only: [:create, :destroy, :update]
+    resources :users, only: [:index, :create, :destroy, :update]
     put 'users/:id/update_nonsensitive', to: 'users#update_nonsensitive'
     get 'email_preferences/status', to: 'email_preferences#status'
     post 'email_preferences/change_subscription', to: 'email_preferences#change_subscription'

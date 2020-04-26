@@ -1,4 +1,11 @@
 class Api::UsersController < ApplicationController
+  before_action :authenticate_user, only: [:index]
+
+  def index
+    users = User.all
+    render json: user_json(users)
+  end
+
   def create
     if(User.find_by email: params["email"].downcase) then
       head 401
@@ -66,5 +73,9 @@ class Api::UsersController < ApplicationController
 
   def user_update_params
     params.require(:user).permit(:name, :email)
+  end
+
+  def user_json(user)
+    UserSerializer.new(user).serializable_hash
   end
 end
