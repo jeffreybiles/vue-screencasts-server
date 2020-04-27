@@ -15,18 +15,14 @@ class Api::UsersController < ApplicationController
       user.set_token
       user.set_email_token
 
-      newsletters = []
-      newsletters.append(3) if user.email_weekly
-      newsletters.append(6) if user.email_daily
+      result = Email.new.create_contact(user)
+      user.active_campaign_id = result['contact']['id']
+      user.save
 
-      begin
-        Email.create_sendinblue_contact(user.email, newsletters)
+      Email.new.update_subscription(user, "2", user.email_weekly)
+      Email.new.update_subscription(user, "3", user.email_daily)
 
-        render json: UserSerializer.new(user, params: { token: true }).serializable_hash
-      rescue SibApiV3Sdk::ApiError => e
-        puts "Exception when calling ContactsApi->create_contact: #{e}"
-        head 500
-      end
+      render json: UserSerializer.new(user, params: { token: true }).serializable_hash
     end
   end
 

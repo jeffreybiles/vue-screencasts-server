@@ -8,12 +8,9 @@ class Api::EmailPreferencesController < ApplicationController
     id = params['id']
     is_subscribed = params['isSubscribed']
 
-    # begin
     result = Email.new.update_subscription(current_user, id, is_subscribed)
-    head result.status
-    # rescue
-    #   create_contact(current_user, [id])
-    # end
+    # TODO: put in error handling
+    head 200
   end
 
   def passwordless_subscription
@@ -30,16 +27,10 @@ class Api::EmailPreferencesController < ApplicationController
   end
 
   def status
-    begin
-      #Retrieves contact informations
-      result = Email.new.contact(current_user)
-      render json: {
-        contactLists: result['contactLists']
-      }
-    rescue SibApiV3Sdk::ApiError => e
-      puts "Exception when calling ContactsApi->get_contact_info: #{e}"
-      render json: { }
-    end
+    result = Email.new.contact(current_user)
+    render json: {
+      contactLists: result['contactLists']
+    }
   end
 
   private
