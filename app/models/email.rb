@@ -33,12 +33,25 @@ class Email
     })
   end
 
+  def update_contact(user)
+    put("contacts/#{user.active_campaign_id}", {
+      contact: {
+        email: user.email,
+        firstName: user.name
+      }
+    })
+  end
+
   def get(url, props = {})
     parse Faraday.get("#{base_url}/#{url}", props, {"Api-Token" => api_key, "Content-Type" => "application/json"})
   end
 
   def post(url, props = {})
     parse Faraday.post("#{base_url}/#{url}", props.to_json, {"Api-Token" => api_key})
+  end
+
+  def put(url, props = {})
+    parse Faraday.put("#{base_url}/#{url}", props.to_json, {"Api-Token" => api_key})
   end
 
   def parse(json)

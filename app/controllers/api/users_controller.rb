@@ -28,9 +28,14 @@ class Api::UsersController < ApplicationController
 
   def update
     user = current_user
+    old_email = user.email
     if user.check_password(params[:old_password]) then
       user.update(user_update_params)
       user.save
+
+      if(old_email != user.email) then
+        Email.new.update_contact(user)
+      end
 
       new_password = params[:new_password]      
       if new_password && new_password.length >= 8 then
