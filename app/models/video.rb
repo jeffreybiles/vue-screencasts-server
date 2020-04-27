@@ -10,4 +10,8 @@ class Video < ApplicationRecord
   def in_free_period
     published_at && (DateTime.now - 7.days) < published_at
   end
+
+  def released
+    published_at && DateTime.now > published_at
+  end
 end

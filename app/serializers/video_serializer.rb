@@ -8,8 +8,9 @@ class VideoSerializer
   attribute :videoUrl, if: Proc.new { |record, params| 
     isFree = !record.pro
     userPro = params && params[:user_pro]
+    user_admin = params && params[:user_admin]
     freePeriod = record.in_free_period
-    isFree || userPro || freePeriod
+    (isFree || userPro || freePeriod) && (record.released || user_admin)
   } do |object|
     object.videoUrl
   end
