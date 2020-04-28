@@ -80,8 +80,6 @@ GEM
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
     erubi (1.8.0)
-    ethon (0.12.0)
-      ffi (>= 1.3.0)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
     fast_jsonapi (1.5)
@@ -91,7 +89,6 @@ GEM
       activesupport (>= 4.2.0)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
-    json (2.3.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -173,9 +170,6 @@ GEM
     selenium-webdriver (3.142.4)
       childprocess (>= 0.5, < 3.0)
       rubyzip (~> 1.2, >= 1.2.2)
-    sib-api-v3-sdk (5.2.5)
-      json (~> 2.1, >= 2.1.0)
-      typhoeus (~> 1.0, >= 1.0.1)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -194,8 +188,6 @@ GEM
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
-    typhoeus (1.3.1)
-      ethon (>= 0.9.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     web-console (4.0.1)
@@ -236,7 +228,6 @@ DEPENDENCIES
   sass-rails (~> 5)
   seed_dump
   selenium-webdriver
-  sib-api-v3-sdk
   spring
   spring-watcher-listen (~> 2.0.0)
   stripe

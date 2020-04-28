@@ -1,4 +1,3 @@
-require 'sib-api-v3-sdk'
 require 'uri'
 require 'net/http'
 require 'openssl'
@@ -18,11 +17,5 @@ class Api::EmailPreferencesController < ApplicationController
     render json: {
       contactLists: result['contactLists']
     }
-  end
-
-  private
-
-  def api_instance
-    SibApiV3Sdk::ContactsApi.new
   end
 end

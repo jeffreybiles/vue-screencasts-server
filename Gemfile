@@ -31,7 +31,6 @@ gem 'rack-cors'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'sib-api-v3-sdk'
 gem 'faraday'
 
 group :development, :test do
