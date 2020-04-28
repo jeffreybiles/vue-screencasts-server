@@ -13,19 +13,6 @@ class Api::EmailPreferencesController < ApplicationController
     head 200
   end
 
-  def passwordless_subscription
-    begin
-      Email.create_sendinblue_contact(params[:email], [3, 6])
-
-      head 200
-    rescue Error => e 
-      puts "There was an error when adding user to a newsletter: #{e}"
-      render json: {
-        error: e
-      }
-    end
-  end
-
   def status
     result = Email.new.contact(current_user)
     render json: {
