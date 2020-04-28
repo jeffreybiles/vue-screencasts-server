@@ -31,6 +31,19 @@ class Email
     })
   end
 
+  def tags
+    get("tags")
+  end
+
+  def add_tag(user, tag_id)
+    post('contactTags', {
+      contactTag: {
+        contact: user.active_campaign_id,
+        tag: tag_id
+      }
+    })
+  end
+
   def get(url, props = {})
     parse Faraday.get("#{base_url}/#{url}", props, {"Api-Token" => api_key, "Content-Type" => "application/json"})
   end

@@ -19,8 +19,11 @@ class Api::UsersController < ApplicationController
       user.active_campaign_id = result['contact']['id']
       user.save
 
+      Email.new.update_subscription(user, "1", true) #Master List
       Email.new.update_subscription(user, "2", user.email_weekly)
       Email.new.update_subscription(user, "3", user.email_daily)
+
+      Email.new.add_tag(user, '2') #created-account
 
       render json: UserSerializer.new(user, params: { token: true }).serializable_hash
     end
