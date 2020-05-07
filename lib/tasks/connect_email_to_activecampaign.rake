@@ -1,4 +1,4 @@
-task :email_resolving => :environment do 
+task :connect_email_to_active_campaign => :environment do 
   contacts = Email.new.get("contacts")["contacts"]
 
   contacts.each do |contact|
