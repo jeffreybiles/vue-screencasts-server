@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2020_04_27_093554) do
     t.text "code"
     t.string "code_summary_state", default: "not_ready"
     t.text "transcript"
+    t.string "slug"
     t.index ["course_id"], name: "index_videos_on_course_id"
   end
 
