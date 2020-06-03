@@ -18,4 +18,11 @@ class Api::EmailPreferencesController < ApplicationController
       contactLists: result['contactLists']
     }
   end
+
+  def create_and_tag
+    tag_id = params['tag_id']
+    email = params['email']
+    result = Email.new.create_and_tag(email, tag_id)
+    head 200
+  end
 end

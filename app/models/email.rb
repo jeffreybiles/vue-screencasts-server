@@ -13,6 +13,21 @@ class Email
     })
   end
 
+  def create_and_tag(email, tag_id)
+    result = post('contact/sync', {
+      contact: {
+        email: email,
+      }
+    })
+    ac_id = result['contact']['id']
+    post('contactTags', {
+      contactTag: {
+        contact: ac_id,
+        tag: tag_id
+      }
+    })
+  end
+
   def create_contact(user)
     post('contact/sync', {
       contact: {
