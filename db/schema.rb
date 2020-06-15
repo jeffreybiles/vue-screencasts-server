@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_27_093554) do
+ActiveRecord::Schema.define(version: 2020_06_15_003946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -53,6 +53,42 @@ ActiveRecord::Schema.define(version: 2020_04_27_093554) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "training_completions", force: :cascade do |t|
+    t.bigint "training_item_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["training_item_id"], name: "index_training_completions_on_training_item_id"
+    t.index ["user_id"], name: "index_training_completions_on_user_id"
+  end
+
+  create_table "training_items", force: :cascade do |t|
+    t.string "title"
+    t.string "exercise_type"
+    t.text "text"
+    t.decimal "position"
+    t.bigint "training_section_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["training_section_id"], name: "index_training_items_on_training_section_id"
+  end
+
+  create_table "training_modules", force: :cascade do |t|
+    t.string "name"
+    t.integer "week_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "training_sections", force: :cascade do |t|
+    t.string "name"
+    t.decimal "position"
+    t.bigint "training_module_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["training_module_id"], name: "index_training_sections_on_training_module_id"
   end
 
   create_table "users", force: :cascade do |t|

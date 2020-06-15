@@ -25,5 +25,10 @@ Rails.application.routes.draw do
     post 'stripe/cancel_subscription', "stripe#cancel_subscription"
     post 'stripe/resubscribe', "stripe#resubscribe"
     post 'stripe/change_card', "stripe#change_card"
+
+    resources :training_modules
+    resources :training_sections
+    resources :training_items
+    resources :training_completions
   end
 end

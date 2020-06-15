@@ -4,6 +4,7 @@ Stripe.api_key = ENV['STRIPE_SECRET']
 class User < ApplicationRecord
   has_many :video_plays
   has_many :played_videos, through: :video_plays, class_name: 'video'
+  has_many :training_completions
   before_save :downcase_fields
 
   def set_password(password)
