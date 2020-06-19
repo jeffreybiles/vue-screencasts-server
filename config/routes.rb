@@ -29,6 +29,6 @@ Rails.application.routes.draw do
     resources :training_modules
     resources :training_sections
     resources :training_items
-    resources :training_completions
+    resources :training_completions, only: :create
   end
 end

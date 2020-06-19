@@ -8,12 +8,18 @@ class Api::TrainingModulesController < ApplicationController
 
   def show
     training_module = TrainingModule.find(params[:id])
-    render json: TrainingModuleSerializer.new(training_module, include: [:training_sections, :'training_sections.training_items']).serializable_hash
+    render json: TrainingModuleSerializer.new(
+        training_module, 
+        include: [:training_sections, :'training_sections.training_items'], 
+      ).serializable_hash
   end
 
   def index
     training_modules = TrainingModule.all
-    render json: TrainingModuleSerializer.new(training_modules, include: [:training_sections, :'training_sections.training_items']).serializable_hash
+    render json: TrainingModuleSerializer.new(
+        training_modules, 
+        include: [:training_sections, :'training_sections.training_items'],
+      ).serializable_hash
   end
 
   def update
