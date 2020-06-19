@@ -1,5 +1,5 @@
 class Api::TrainingModulesController < ApplicationController
-  # before_action :authenticate_user, only: [:create, :update, :destroy]
+  before_action :authenticate_user, only: [:create, :update, :destroy]
 
   def create
     training_module = TrainingModule.create(name: params[:name], week_number: params[:week_number])

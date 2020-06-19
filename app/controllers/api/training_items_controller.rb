@@ -1,5 +1,5 @@
 class Api::TrainingItemsController < ApplicationController
-  # before_action :authenticate_user, only: [:create, :update, :destroy]
+  before_action :authenticate_user, only: [:create, :update, :destroy]
 
   def create
     training_item = TrainingItem.create(section_params)
