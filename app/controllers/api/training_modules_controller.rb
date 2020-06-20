@@ -2,7 +2,7 @@ class Api::TrainingModulesController < ApplicationController
   before_action :authenticate_user, only: [:create, :update, :destroy]
 
   def create
-    training_module = TrainingModule.create(name: params[:name], week_number: params[:week_number])
+    training_module = TrainingModule.create(module_params)
     render_module(training_module)
   end
 
@@ -24,8 +24,7 @@ class Api::TrainingModulesController < ApplicationController
 
   def update
     training_module = TrainingModule.find(params[:id])
-    training_module.name = params[:name]
-    training_module.week_number = params[:week_number]
+    training_module.update_attributes(module_params)
     training_module.save
     render_module(training_module)
   end
@@ -37,5 +36,9 @@ class Api::TrainingModulesController < ApplicationController
 
   def render_module(modules)
     render json: TrainingModuleSerializer.new(modules).serializable_hash    
+  end
+
+  def module_params
+    params.require(:training_module).permit(:name, :week_number)
   end
 end

@@ -3,7 +3,7 @@ class Api::TrainingSectionsController < ApplicationController
 
   def create
     training_section = TrainingSection.create(section_params)
-    render_module(training_section)
+    render_section(training_section)
   end
 
   def update
