@@ -13,6 +13,14 @@ class User < ApplicationRecord
     self.save
   end
 
+  def self.build_user(user_create_params, password)
+    user = User.create(user_create_params)
+    user.set_password(password)
+    user.set_token
+    user.set_email_token
+    return user
+  end
+
   def set_token
     self.token = generate_token
     self.save

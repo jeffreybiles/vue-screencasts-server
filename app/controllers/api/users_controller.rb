@@ -10,10 +10,7 @@ class Api::UsersController < ApplicationController
     if(User.find_by email: params["email"].downcase) then
       head 401
     else
-      user = User.create(user_create_params)
-      user.set_password(params["password"])
-      user.set_token
-      user.set_email_token
+      user = User.build_user(user_create_params, params["password"])
 
       result = Email.new.create_contact(user)
       user.active_campaign_id = result['contact']['id']
