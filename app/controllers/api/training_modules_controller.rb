@@ -39,6 +39,6 @@ class Api::TrainingModulesController < ApplicationController
   end
 
   def module_params
-    params.require(:training_module).permit(:name, :week_number)
+    params.require(:training_module).permit(:name, :week_number, :intro)
   end
 end
