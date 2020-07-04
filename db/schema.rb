@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_141651) do
+ActiveRecord::Schema.define(version: 2020_07_04_061057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 2020_06_25_141651) do
     t.bigint "training_section_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "vimeo_id"
     t.index ["training_section_id"], name: "index_training_items_on_training_section_id"
   end
 
