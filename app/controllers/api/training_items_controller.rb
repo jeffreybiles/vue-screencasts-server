@@ -23,6 +23,6 @@ class Api::TrainingItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:training_item).permit(:title, :position, :training_section_id, :text, :exercise_type, :vimeo_id)
+    params.require(:training_item).permit(:title, :position, :training_section_id, :text, :exercise_type, :vimeo_uid)
   end
 end
