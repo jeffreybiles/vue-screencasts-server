@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_04_223359) do
+ActiveRecord::Schema.define(version: 2020_07_06_165738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_223359) do
     t.boolean "free_subscription"
     t.integer "plan_seats"
     t.string "active_campaign_id"
+    t.boolean "bootcamp"
   end
 
   create_table "video_plays", force: :cascade do |t|

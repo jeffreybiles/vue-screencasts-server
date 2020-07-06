@@ -13,6 +13,13 @@ class User < ApplicationRecord
     self.save
   end
 
+  def self.bootcamp_user(username, password)
+    User.build_user({
+      email: username,
+      bootcamp: true
+    }, password)
+  end
+
   def self.build_user(user_create_params, password)
     user = User.create(user_create_params)
     user.set_password(password)
