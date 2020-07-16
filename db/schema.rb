@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_14_162618) do
+ActiveRecord::Schema.define(version: 2020_07_16_083445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -75,6 +75,8 @@ ActiveRecord::Schema.define(version: 2020_07_14_162618) do
     t.string "vimeo_uid"
     t.string "youtube_uid"
     t.string "video_url"
+    t.boolean "published", default: true
+    t.text "answer"
     t.index ["training_section_id"], name: "index_training_items_on_training_section_id"
   end
 
