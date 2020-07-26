@@ -47,7 +47,8 @@ class User < ApplicationRecord
   end
 
   def pro
-    return calculate_pro
+    return true
+    # return calculate_pro
   end
 
   def calculate_pro
