@@ -10,10 +10,6 @@ class UserSerializer
     object.training_completions.map(&:training_item_id).uniq
   end
 
-  attribute :completed_training_item_ids do |object|
-    object.training_completions.map(&:training_item_id).uniq
-  end
-
   attribute :has_stripe do |object|
     !!object.stripe_id && !!object.subscription_id
   end

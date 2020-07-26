@@ -30,5 +30,7 @@ Rails.application.routes.draw do
     resources :training_sections
     resources :training_items
     resources :training_completions, only: :create
+
+    resources :training_users, only: [:index, :create]
   end
 end
