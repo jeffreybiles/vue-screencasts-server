@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_16_083445) do
+ActiveRecord::Schema.define(version: 2020_08_03_093713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2020_07_16_083445) do
     t.integer "plan_seats"
     t.string "active_campaign_id"
     t.boolean "bootcamp"
+    t.decimal "playback_rate", default: "1.0"
   end
 
   create_table "video_plays", force: :cascade do |t|

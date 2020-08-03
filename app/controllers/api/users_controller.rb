@@ -51,6 +51,7 @@ class Api::UsersController < ApplicationController
     user = current_user
     user.next_steps_taken = params[:next_steps_taken] if params[:next_steps_taken]
     user.phone_number = params[:phone_number] if params[:phone_number]
+    user.playback_rate = params[:playback_rate] if params[:playback_rate]
 
     user.save
 
@@ -73,7 +74,7 @@ class Api::UsersController < ApplicationController
   end
 
   def user_update_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :playback_rate)
   end
 
   def user_json(user)
