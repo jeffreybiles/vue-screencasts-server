@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_03_093713) do
+ActiveRecord::Schema.define(version: 2020_08_25_060642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
@@ -62,6 +62,18 @@ ActiveRecord::Schema.define(version: 2020_08_03_093713) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["training_item_id"], name: "index_training_completions_on_training_item_id"
     t.index ["user_id"], name: "index_training_completions_on_user_id"
+  end
+
+  create_table "training_courses", force: :cascade do |t|
+    t.string "name"
+    t.string "external_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "training_courses_modules", id: false, force: :cascade do |t|
+    t.bigint "training_course_id", null: false
+    t.bigint "training_module_id", null: false
   end
 
   create_table "training_items", force: :cascade do |t|
