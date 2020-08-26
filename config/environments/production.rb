@@ -60,6 +60,17 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "vue_screencasts_server_production"
 
+
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for hover mail
+  config.action_mailer.smtp_settings = {
+  :address              => "mail.hover.com",
+  :port                 => 587,
+  :user_name            => ENV['mail_username'],
+  :password             => ENV['mail_password'],
+  :authentication       => "plain",
+  # :enable_starttls_auto => true
+  }
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.

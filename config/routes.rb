@@ -32,5 +32,7 @@ Rails.application.routes.draw do
     resources :training_completions, only: :create
 
     resources :training_users, only: [:index, :create]
+
+    post 'hooks/new_training_customer', "hooks#new_training_customer"
   end
 end
